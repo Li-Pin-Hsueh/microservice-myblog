@@ -12,18 +12,19 @@ app.post("/events", (req, res) => {
 
   events.push(event);
 
-  axios.post("http://localhost:4000/events", event).catch((e) => {
+  axios.post("http://posts-clusterip-srv:4000/events", event).catch((e) => {
     console.log("ERROR: ", e.message);
   }); // posts service
-  axios.post("http://localhost:4001/events", event).catch((e) => {
-    console.log("ERROR: ", e.message);
-  }); // comments service
-  axios.post("http://localhost:4002/events", event).catch((e) => {
-    console.log("ERROR: ", e.message);
-  }); // query service
-  axios.post("http://localhost:4003/events", event).catch((e) => {
-    console.log("ERROR: ", e.message);
-  }); // moderation service
+  
+  // axios.post("http://localhost:4001/events", event).catch((e) => {
+  //   console.log("ERROR: ", e.message);
+  // }); // comments service
+  // axios.post("http://localhost:4002/events", event).catch((e) => {
+  //   console.log("ERROR: ", e.message);
+  // }); // query service
+  // axios.post("http://localhost:4003/events", event).catch((e) => {
+  //   console.log("ERROR: ", e.message);
+  // }); // moderation service
 
   res.send({ status: "OK" });
 });
