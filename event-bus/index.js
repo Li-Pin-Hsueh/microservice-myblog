@@ -7,24 +7,24 @@ app.use(bodyParser.json());
 
 const events = [];
 
-app.post("/events", (req, res) => {
+app.post("/events", async (req, res) => {
   const event = req.body;
 
   events.push(event);
 
-  axios.post("http://posts-clusterip-srv:4000/events", event).catch((e) => {
+  await axios.post("http://posts-clusterip-srv:4000/events", event).catch((e) => {
     console.log("ERROR: ", e.message);
   }); // posts service
   
-  axios.post("http://comments-srv:4001/events", event).catch((e) => {
+  await axios.post("http://comments-srv:4001/events", event).catch((e) => {
     console.log("ERROR: ", e.message);
   }); // comments service
 
-  axios.post("http://query-srv:4002/events", event).catch((e) => {
+  await axios.post("http://query-srv:4002/events", event).catch((e) => {
     console.log("ERROR: ", e.message);
   }); // query service
   
-  axios.post("http://moderation-srv:4003/events", event).catch((e) => {
+  await axios.post("http://moderation-srv:4003/events", event).catch((e) => {
     console.log("ERROR: ", e.message);
   }); // moderation service
 
