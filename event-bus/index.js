@@ -16,15 +16,17 @@ app.post("/events", (req, res) => {
     console.log("ERROR: ", e.message);
   }); // posts service
   
-  // axios.post("http://localhost:4001/events", event).catch((e) => {
-  //   console.log("ERROR: ", e.message);
-  // }); // comments service
-  // axios.post("http://localhost:4002/events", event).catch((e) => {
-  //   console.log("ERROR: ", e.message);
-  // }); // query service
-  // axios.post("http://localhost:4003/events", event).catch((e) => {
-  //   console.log("ERROR: ", e.message);
-  // }); // moderation service
+  axios.post("http://comments-srv:4001/events", event).catch((e) => {
+    console.log("ERROR: ", e.message);
+  }); // comments service
+
+  axios.post("http://query-srv:4002/events", event).catch((e) => {
+    console.log("ERROR: ", e.message);
+  }); // query service
+  
+  axios.post("http://moderation-srv:4003/events", event).catch((e) => {
+    console.log("ERROR: ", e.message);
+  }); // moderation service
 
   res.send({ status: "OK" });
 });
